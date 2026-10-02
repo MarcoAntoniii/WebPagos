@@ -1,7 +1,12 @@
+using Business;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<B_Pago>();
+builder.Services.AddScoped<PagoFactory>();
 
 var app = builder.Build();
 

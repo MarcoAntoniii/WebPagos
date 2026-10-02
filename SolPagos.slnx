@@ -6,6 +6,6 @@
     <Project Path="Business/Business.csproj" />
   </Folder>
   <Folder Name="/Entities/">
-    <Project Path="Cliente/Cliente.csproj" />
+    <Project Path="Cliente/Entities.csproj" />
   </Folder>
 </Solution>
