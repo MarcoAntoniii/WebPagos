@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/1-.UI/">
+    <Project Path="WebPagos/WebPagos.csproj" />
+  </Folder>
+  <Folder Name="/2-.Business/" />
+  <Folder Name="/3-.Data/" />
+</Solution>
