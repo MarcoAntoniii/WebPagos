@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Entities;
+@model E_Pago
+
+@{
     Layout = null;
 }
 
@@ -10,18 +13,22 @@
     <title>Document</title>
 </head>
 <body>
-    <form>
+    @if (TempData["Error"] != null)
+    {
+        <p>@TempData["Error"]</p>
+    }
+    <form asp-controller="Home" asp-action="Procesar" method="post">
         <div>
             <label>Nombre del cliente</label>
         </div>
         <div>
-            <input type="text" name="Nombre"/>
+            <input type="text" name="Cliente" />
         </div>
         <div>
             <label>Monto</label>
         </div>
         <div>
-            <input type="number" name="Monto"/>
+            <input type="number" name="Monto" />
         </div>
         <div>
             <label>Selecciona un Metodo de pago</label>
@@ -29,11 +36,17 @@
         <div>
             <select name="Metodo">
                 <option value="Tarjeta">Tarjeta</option>
-                <option value="Trasferencia">Trasferencia</option>
+                <option value="Transferencia">Trasferencia</option>
                 <option value="Efectivo">Efectivo</option>
+                <option value="Cheque">Cheque</option>
             </select>
         </div>
         <button type="submit">Pagar</button>
     </form>
+
+    @if (Model != null)
+    {
+        <p>El cliente @Model.Cliente pago por @Model.ObtenerMetodoPago() una comisión correspondiente de: @Model.CalcularComision().ToString("c") por un monto de @Model.Monto</p>
+    }
 </body>
 </html>
