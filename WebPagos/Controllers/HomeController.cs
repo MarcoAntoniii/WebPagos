@@ -1,3 +1,5 @@
+using Business;
+using Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebPagos.Models;
@@ -6,20 +8,31 @@ namespace WebPagos.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly B_Pago b_pago;
+
+        public HomeController(B_Pago b_pag)
+        {
+            b_pago = b_pag;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult Procesar(string Cliente, decimal Monto, string Metodo)
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            try
+            {
+                E_Pago pago =  b_pago.Procesar(Metodo, Cliente, Monto);
+                return View("Index", pago);
+            }
+            catch (ArgumentException ex)
+            {
+                TempData["Error"] = ex.Message;
+                return View("Index");
+            }
         }
     }
 }
