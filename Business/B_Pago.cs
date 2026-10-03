@@ -25,12 +25,12 @@ namespace Business
         {
             if(string.IsNullOrWhiteSpace(cliente))
             {
-                throw new Exception("El nombre no puede estar vacio");
+                throw new ArgumentException("El nombre no puede estar vacio");
             }
 
             if(monto <= 0)
             {
-                throw new Exception("El monto no puede ser menor o igual a 0");
+                throw new ArgumentException("El monto no puede ser menor o igual a 0");
             }                
         }
     }
